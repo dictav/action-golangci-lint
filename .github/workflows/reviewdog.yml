@@ -13,10 +13,11 @@ jobs:
       - name: golangci-lint
         uses: ./
         with:
+          workdir: testdata
           github_token: ${{ secrets.github_token }}
           filter_mode: "nofilter"
           level: warning
-          golangci_lint_flags: "--config=.github/.golangci.yml ./testdata"
+          golangci_lint_flags: "--config=../.github/.golangci.yml"
 
   golangci-lint-fail_on_error:
     name: runner / golangci-lint-fail_on_error
@@ -27,11 +28,12 @@ jobs:
       - name: golangci-lint
         uses: ./
         with:
+          workdir: testdata
           github_token: ${{ secrets.github_token }}
           filter_mode: "nofilter"
           fail_on_error: true
           level: warning
-          golangci_lint_flags: "--config=.github/.golangci.yml ./testdata"
+          golangci_lint_flags: "--config=../.github/.golangci.yml"
 
   golangci-lint-platform:
     name: runner / golangci-lint-platform
