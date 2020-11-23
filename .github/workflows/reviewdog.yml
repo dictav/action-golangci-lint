@@ -48,6 +48,7 @@ jobs:
           tool_name: "golangci-lint-github-pr-review"
           reporter: "github-pr-review"
           fail_on_error: true
+          filter_mode: "nofilter"
 
   golangci-lint-github-check:
     name: runner / golangci-lint (github-check)
