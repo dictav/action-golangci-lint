@@ -13,9 +13,10 @@ jobs:
       - name: golangci-lint
         uses: ./
         with:
+          workdir: "./testdata"
           github_token: ${{ secrets.github_token }}
           level: warning
-          golangci_lint_flags: "--config=.github/.golangci.yml ./testdata"
+          golangci_lint_flags: "--config=../.github/.golangci.yml"
 
   golangci-lint-platform:
     name: runner / golangci-lint-platform
@@ -28,10 +29,11 @@ jobs:
       - name: golangci-lint (platform)
         uses: ./
         with:
+          workdir: "./testdata"
           github_token: ${{ secrets.github_token }}
           tool_name: golangci-lint-${{ matrix.platform }}
           level: warning
-          golangci_lint_flags: "--config=.github/.golangci.yml ./testdata"
+          golangci_lint_flags: "--config=../.github/.golangci.yml"
 
   golangci-lint-github-pr-review:
     name: runner / golangci-lint (github-pr-review)
@@ -42,9 +44,10 @@ jobs:
       - name: golangci-lint w/ github-pr-review
         uses: ./
         with:
-          golangci_lint_flags: "./testdata"
+          workdir: "./testdata"
           tool_name: "golangci-lint-github-pr-review"
           reporter: "github-pr-review"
+          fail_on_error: true
 
   golangci-lint-github-check:
     name: runner / golangci-lint (github-check)
@@ -55,7 +58,7 @@ jobs:
       - name: golangci-lint w/ github-check
         uses: ./
         with:
-          golangci_lint_flags: "./testdata"
+          workdir: "./testdata"
           tool_name: "golangci-lint-github-check"
           level: warning
           reporter: "github-check"
@@ -69,7 +72,6 @@ jobs:
         uses: ./
         with:
           workdir: "./testdata"
-          golangci_lint_flags: ""
           tool_name: "golangci-lint-workdir"
           level: warning
           reporter: "github-check"
@@ -84,10 +86,11 @@ jobs:
       - name: golangci-lint (All-In-One config)
         uses: ./
         with:
+          workdir: "./testdata"
           github_token: ${{ secrets.github_token }}
           tool_name: "golangci-lint-all-in-one"
           level: warning
-          golangci_lint_flags: "--enable-all --exclude-use-default=false ./testdata"
+          golangci_lint_flags: "--enable-all --exclude-use-default=false"
 
   govet:
     name: runner / govet
@@ -98,8 +101,9 @@ jobs:
       - name: govet
         uses: ./
         with:
+          workdir: "./testdata"
           github_token: ${{ secrets.github_token }}
-          golangci_lint_flags: "--disable-all -E govet ./testdata"
+          golangci_lint_flags: "--disable-all -E govet"
           tool_name: govet
 
   staticcheck:
@@ -111,8 +115,9 @@ jobs:
       - name: staticcheck
         uses: ./
         with:
+          workdir: "./testdata"
           github_token: ${{ secrets.github_token }}
-          golangci_lint_flags: "--disable-all -E staticcheck ./testdata"
+          golangci_lint_flags: "--disable-all -E staticcheck"
           tool_name: staticcheck
 
   golint:
@@ -124,8 +129,9 @@ jobs:
       - name: golint
         uses: ./
         with:
+          workdir: "./testdata"
           github_token: ${{ secrets.github_token }}
-          golangci_lint_flags: "--disable-all -E golint ./testdata"
+          golangci_lint_flags: "--disable-all -E golint"
           tool_name: golint
           level: warning
 
@@ -138,8 +144,9 @@ jobs:
       - name: errcheck
         uses: ./
         with:
+          workdir: "./testdata"
           github_token: ${{ secrets.github_token }}
-          golangci_lint_flags: "--disable-all -E errcheck ./testdata"
+          golangci_lint_flags: "--disable-all -E errcheck"
           tool_name: errcheck
           level: warning
 
@@ -152,7 +159,8 @@ jobs:
       - name: misspell
         uses: ./
         with:
+          workdir: "./testdata"
           github_token: ${{ secrets.github_token }}
-          golangci_lint_flags: "--disable-all -E misspell ./testdata"
+          golangci_lint_flags: "--disable-all -E misspell"
           tool_name: misspell
           level: info
